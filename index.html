@@ -67,7 +67,21 @@ nav.open{transform:none;visibility:visible}#burger{position:relative;z-index:60}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;margin-top:3rem}
 .card{border:1px solid #2a2a2a;display:flex;flex-direction:column;transition:border-color .4s}
 .card:hover{border-color:var(--sand)}
-.card .ph{aspect-ratio:16/10;border:0}
+.card .ph{
+  aspect-ratio:16/10;
+  border:0;
+  padding:0;
+  overflow:hidden;
+  position:relative;
+}
+.card .ph img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 .card div.b{padding:1.4rem;display:flex;flex-direction:column;gap:.6rem;flex:1}
 .card h3{font-size:1.6rem}.card p{margin:0;font-size:.9rem;color:#b9b4a9;flex:1}
 .card a.l{font:500 .72rem var(--sans);letter-spacing:.15em;color:var(--sand)}
@@ -83,7 +97,23 @@ nav.open{transform:none;visibility:visible}#burger{position:relative;z-index:60}
 @media(max-width:600px){.song{grid-template-columns:52px 1fr auto}.song .ph{width:52px;height:52px}}
 /* gallery */
 .gal{columns:3 240px;column-gap:1rem;margin-top:3rem}
-.gal .ph{break-inside:avoid;margin-bottom:1rem;transition:transform .6s}.gal .ph:hover{transform:scale(1.015)}
+
+.gal .ph{
+  break-inside:avoid;
+  margin-bottom:1rem;
+  transition:transform .6s;
+  padding:0;
+  overflow:hidden;
+  position:relative;
+}
+
+.gal .ph img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
 /* contact */
 #contratar{text-align:center;max-width:none;background:#171512}
 #contratar h2,#contratar>p{margin-inline:auto}
@@ -180,26 +210,35 @@ const CONTENT={
  email:"hola@tudominio.com",               // PROVISIONAL
  instagram:"https://instagram.com/",       // PROVISIONAL
  youtube:"https://youtube.com/",           // PROVISIONAL
-hero:{video:"./video-musico2.mp4",poster:""},
-ambientAudio:"./cancion-artista1.mp3",
-artist:{photo:"./imagen-musico.jpg",fields:[
+ hero:{video:"public/video/video-musico2.mp4",poster:""},                // ruta a tu video (mp4/webm) y portada
+ ambientAudio:"public/audio/cancion-artista1.mp3"  ,                          // ruta a tu audio de ambiente; vacío = pad sintético provisional
+ artist:{photo:"public/img/portada.jpeg",fields:[
   ["Nombre artístico","Eddy Gael"],
   ["Biografía","Licenciado en educación artística musical y cultural Universidad de Antioquia."],
   ["Historia musical","Entre los años 2000 y 2006 hice parte del trio vocal “Sentimiento” como primera voz y guitarra. En el año 2006 fuí cofundador y director del grupo musical “Amalgama” cuya intención primordial fué estudiar y recrear la música en sus diversas manifestaciones o géneros, haciendo énfasis en la Música Andina Colombiana."],
   ["Estilo musical","Música Andina Colombiana."]]},
  services:[
-  ["Serenatas","Una declaración que se canta, con repertorio a tu medida."],
-  ["Matrimonios","Ceremonia y cóctel con guitarra en vivo."],
-  ["Eventos privados","Ambiente íntimo para cumpleaños y reuniones."],
-  ["Restaurantes y establecimientos","Música en vivo que acompaña la experiencia."],
-  ["Eventos corporativos","Presentaciones sobrias para marcas y equipos."],
-  ["Presentaciones personalizadas","Setlist diseñado para tu ocasión."],
-  ["Acompañamiento musical","Guitarra para voces, ceremonias y proyectos."]],
+  ["Serenatas","Una declaración que se canta, con repertorio a tu medida.","public/img/musico1.jpeg"],
+  ["Matrimonios","Ceremonia y cóctel con guitarra en vivo.", "public/img/musico2.jpg"],
+  ["Eventos privados","Ambiente íntimo para cumpleaños y reuniones.", "public/img/musico3.jpeg"], 
+  ["Restaurantes y establecimientos","Música en vivo que acompaña la experiencia.", "public/img/musico4.jpeg"],
+  ["Eventos corporativos","Presentaciones sobrias para marcas y equipos.", "public/img/musico5.jpeg"],
+  ["Presentaciones personalizadas","Setlist diseñado para tu ocasión.", "public/img/musico6.jpeg"],
+  ["Acompañamiento musical","Guitarra para voces, ceremonias y proyectos.", "public/img/musico7.jpeg"]],
  songs:[ // src/cover/links vacíos = demostración provisional
-  {t:"Canción original 1",d:"Pieza provisional. Describe aquí la historia de la canción.",dur:"3:24",src:"",cover:"",kind:"Original",links:{Spotify:"",YouTube:""}},
-  {t:"Interpretación 1",d:"Versión provisional. Indica el autor original si es un cover.",dur:"4:02",src:"",cover:"",kind:"Interpretación",links:{YouTube:""}},
-  {t:"Sesión acústica",d:"Grabación provisional en vivo.",dur:"2:48",src:"",cover:"",kind:"Original",links:{Spotify:""}}],
- gallery:[["En vivo",300],["Sesión",220],["Retrato artístico",360],["Ensayo",240],["Evento",280],["Detrás de cámaras",230]] // PROVISIONAL
+  {t:"Juntos",d:"Pieza provisional. Canción original album de Eddy Gaél.",dur:"3:02",src:"public/songs/8 JUNTOS .mp3",cover:"public/img/musico4.jpeg",kind:"Original",links:{Spotify:"",YouTube:""}},
+  {t:"Bailar Contigo",d:"Pieza provisional. Canción original album Eddy Gaél.",dur:"3:03",src:"public/songs/6 BAILAR CONTIGO .mp3",cover:"public/img/musico5.jpeg",kind:"Original",links:{YouTube:""}},
+  {t:"Un Beso y una Flor",d:"Cover interpretado por Eddy Gaél",dur:"3:40",src:"public/songs/2 UN BESO Y UNA FLOR .mp3",cover:"public/img/musico3.jpeg",kind:"Cover",links:{Spotify:""}}],
+ 
+gallery:[
+  ["En vivo",300,"public/img/musico1.jpeg"],
+  ["Sesión",220,"public/img/musico2.jpg"],
+  ["Retrato artístico",360,"public/img/musico3.jpeg"],
+  ["Ensayo",240,"public/img/musico4.jpeg"],
+  ["Evento",280,"public/img/musico5.jpeg"],
+  ["Detrás de cámaras",230,"public/img/musico6.jpeg"]
+]
+
 };
 /* ===== utilidades ===== */
 const $=s=>document.querySelector(s),wa=t=>`https://wa.me/${CONTENT.whatsapp}?text=${encodeURIComponent(t)}`;
@@ -208,10 +247,28 @@ $('#yr').textContent=new Date().getFullYear();
 /* ===== render ===== */
 $('#artistDl').innerHTML=CONTENT.artist.fields.map(([k,v])=>`<div><dt>${k.toUpperCase()}</dt><dd>${v}</dd></div>`).join('');
 if(CONTENT.artist.photo)Object.assign($('#portrait'),{innerHTML:`<img src="${CONTENT.artist.photo}" alt="Retrato del guitarrista" style="width:100%;height:100%;object-fit:cover">`}).style.padding=0;
-$('#svc').innerHTML=CONTENT.services.map(([t,d],i)=>`<article class="card rv"><div class="ph">IMAGEN PROVISIONAL</div><div class="b"><h3>${t}</h3><p>${d}</p><a class="l" target="_blank" rel="noopener" href="${wa('Hola, me interesa el servicio de '+t+'.')}">COTIZAR POR WHATSAPP</a></div></article>`).join('');
+
+$('#svc').innerHTML=CONTENT.services.map(([t,d,img],i)=>`
+<article class="card rv">
+  <div class="ph">
+    <img src="${img}" alt="${t}" style="width:100%;height:100%;object-fit:cover">
+  </div>
+  <div class="b">
+    <h3>${t}</h3>
+    <p>${d}</p>
+    <a class="l" target="_blank" rel="noopener" href="${wa('Hola, me interesa el servicio de '+t+'.')}">COTIZAR POR WHATSAPP</a>
+  </div>
+</article>`).join('');
+
 $('#evt').innerHTML=CONTENT.services.map(s=>`<option>${s[0]}</option>`).join('')+'<option>Otro</option>';
 $('#songs').innerHTML=CONTENT.songs.map((s,i)=>`<div class="song rv" data-i="${i}"><div class="ph">${s.cover?`<img src="${s.cover}" alt="Portada de ${s.t}" width="64" height="64">`:'♪'}</div><div><h3>${s.t}</h3><p>${s.d}</p><div class="meta"><span>${s.kind}</span><span>${s.dur}</span>${Object.entries(s.links).map(([k,v])=>`<a ${v?`href="${v}" target="_blank" rel="noopener"`:'href="#musica"'}>${k}</a>`).join('')}</div></div><button class="pbtn" aria-label="Reproducir ${s.t}">▶</button><div class="bar"><i></i></div></div>`).join('');
-$('#gal').innerHTML=CONTENT.gallery.map(([t,h])=>`<div class="ph rv" style="height:${h}px">${t.toUpperCase()} · PROVISIONAL</div>`).join('');
+
+$('#gal').innerHTML=CONTENT.gallery.map(([t,h,img])=>`
+  <div class="ph rv" style="height:${h}px">
+    <img src="${img}" alt="${t}">
+  </div>
+`).join('');
+
 const L=[["WHATSAPP",wa('Hola, quiero cotizar música en vivo.')],["INSTAGRAM",CONTENT.instagram],["YOUTUBE",CONTENT.youtube],["CORREO","mailto:"+CONTENT.email]];
 $('#links').innerHTML=L.map(([k,u],i)=>`<a ${i==0?'class="btn solid"':''} href="${u}" target="_blank" rel="noopener">${k}</a>`).join('')+'<span class="muted">MEDELLÍN, COLOMBIA</span>';
 $('#flinks').innerHTML=L.slice(1).map(([k,u])=>`<a href="${u}" target="_blank" rel="noopener" style="margin-right:1rem">${k}</a>`).join('');
@@ -253,3 +310,4 @@ document.querySelectorAll('.song').forEach(el=>{const i=+el.dataset.i,s=CONTENT.
 </script>
 </body>
 </html>
+
